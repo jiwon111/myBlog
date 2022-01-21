@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import SignInForm from './Components/SignIn/SignInForm';
 import { Route, Routes } from 'react-router-dom';
-import PostList from './Pages/PostList';
+import PostList from './Pages/PostListPage';
 
 const App = () => {
   return (
