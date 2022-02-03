@@ -56,7 +56,7 @@ const SignInForm = () => {
           style={{
             marginTop: '30px',
             marginBottom: '20px',
-            backGroundColor: `${palette.cyan[5]}`,
+            backgroundColor: `${palette.cyan[5]}`,
           }}
           onClick={() => loginHandler()}
         >

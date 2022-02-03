@@ -34,7 +34,12 @@ const Header = () => {
         >
           myBlog
         </Link>
-        <Button variant="contained">로그인</Button>
+        <Button
+          variant="contained"
+          style={{ backgroundColor: `${palette.cyan[6]}` }}
+        >
+          로그인
+        </Button>
       </div>
     </div>
   );
