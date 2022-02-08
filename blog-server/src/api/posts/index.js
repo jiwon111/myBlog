@@ -1,20 +1,29 @@
-const express = require('express');
+import { Router } from 'express';
 
-const posts = new express();
+const posts = new Router();
 
 const print = req => {
-  req.send = {
+  req.body = {
     method: req.method,
     path: req.path,
     params: req.params,
   };
 };
 
-posts.get('/', print);
+posts.get('/', (req, res) => {
+  res.send(print(req));
+});
 posts.post('/', print);
-posts.get('/:id', print);
+posts.get('/:id', (req, res) => {
+  res.send(print(req));
+});
 posts.delete('/:id', print);
 posts.put('/:id', print);
 posts.patch('/:id', print);
 
-module.exports = posts;
+// posts.post('/', print);
+// posts.get('/:id', print);
+// posts.delete('/:id', print);
+// posts.put('/:id', print);
+// posts.patch('/:id', print);
+export default posts;

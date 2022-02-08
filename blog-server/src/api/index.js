@@ -1,8 +1,8 @@
-const express = require('express');
-const posts = require('./posts');
+import { Router } from 'express';
+import posts from './posts';
 
-const api = new express();
+const api = new Router();
 
 api.use('/posts', posts);
 
-module.exports = api;
+export default api;
