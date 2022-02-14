@@ -1,7 +1,7 @@
 const express = require('express');
 const posts = require('./posts');
 
-const api = new express();
+const api = express.Router();
 
 api.use('/posts', posts);
 
