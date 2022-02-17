@@ -1,6 +1,7 @@
 const express = require('express');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 const { sequelize } = require('../models');
 const api = require('./api');
 
@@ -14,7 +15,11 @@ sequelize
   .catch(err => {
     console.error(err);
   });
-
+app.use(
+  cors({
+    credentials: true,
+  }),
+);
 app.use(morgan('dev'));
 app.use(bodyParser.raw());
 app.use(bodyParser.json());
