@@ -1,10 +1,14 @@
 const express = require('express');
 const postController = require('./posts.controller');
 
-const posts = express.Router();
+const posts = new express();
 
-posts.get('/', postController.get);
-posts.post('/', postController.post);
+// posts.get('/', postController.get);
+// posts.post('/', postController.post);
+
+posts.get('/', postController);
+posts.post('/', postController);
+
 // const print = req => {
 //   req.send = {
 //     method: req.method,

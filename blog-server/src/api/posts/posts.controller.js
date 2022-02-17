@@ -1,20 +1,18 @@
 const express = require('express');
 const Post = require('../../../models/post');
 
-const router = express.Router();
+const router = new express();
 
-//포스트 작성
+//포스트 조회
 router.get('/', async (req, res, next) => {
   try {
     const post = await Post.findAll();
-    res.json = post;
-    console.log(res);
+    res.json(post);
   } catch (err) {
-    console.error(err);
     next(err);
   }
 });
-
+//포스트 작성
 router.post('/', async (req, res, next) => {
   try {
     const post = await Post.create({
@@ -23,10 +21,8 @@ router.post('/', async (req, res, next) => {
       created_date: req.body.created_date,
       tags: req.body.tags,
     });
-    console.log(post);
     res.status(201).json(post);
   } catch (err) {
-    console.error(err);
     next(err);
   }
 });

@@ -1,8 +1,11 @@
 const express = require('express');
+const morgan = require('morgan');
+const bodyParser = require('body-parser');
 const { sequelize } = require('../models');
 const api = require('./api');
 
 const app = new express();
+
 sequelize
   .sync({ force: false })
   .then(() => {
@@ -12,6 +15,10 @@ sequelize
     console.error(err);
   });
 
+app.use(morgan('dev'));
+app.use(bodyParser.raw());
+app.use(bodyParser.json());
+app.use(bodyParser.text());
 app.get('/', (req, res) => {
   res.send('홈');
 });
