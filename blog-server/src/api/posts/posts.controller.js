@@ -1,7 +1,7 @@
 const express = require('express');
 const Post = require('../../../models/post');
 
-const router = new express();
+const router = express.Router();
 
 //포스트 조회
 router.get('/', async (req, res, next) => {
