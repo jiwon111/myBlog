@@ -7,7 +7,7 @@ const Header = () => {
   return (
     <div
       style={{
-        width: '100vw',
+        width: '100%',
         height: '10vh',
         backgroundColor: `${palette.gray[0]}`,
         boxShadow: '0 2 4 rgba(0, 0, 0, 0.8)',

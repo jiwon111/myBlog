@@ -33,10 +33,10 @@ app.get('/about/:name?', (req, res) => {
   res.send(name ? `${name}의 소개` : '소개');
 });
 
-app.get('/posts', (req, res) => {
-  const { id } = req.query;
-  res.send(id ? `포스트 #${id}` : '포스트 아이디가 없습니다.');
-});
+// app.get('/posts', (req, res) => {
+//   const { id } = req.query;
+//   res.send(id ? `포스트 #${id}` : '포스트 아이디가 없습니다.');
+// });
 
 app.use('/api', api); //api 라우트 적용(/api/test)
 
