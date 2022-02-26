@@ -12,6 +12,19 @@ router.get('/', async (req, res, next) => {
     next(err);
   }
 });
+router.get('/:id', async (req, res, next) => {
+  try {
+    const post = await Post.findOne({
+      where: {
+        id: req.params.id,
+      },
+    });
+    res.json(post);
+    console.log(post);
+  } catch (err) {
+    next(err);
+  }
+});
 //포스트 작성
 router.post('/', async (req, res, next) => {
   try {
