@@ -9,6 +9,7 @@ const PostListBlock = styled.div`
 const PostItemBlock = styled.div`
   /* padding-top: 3rem; */
   padding-bottom: 3rem;
+  padding-left: 3rem;
   /* &:first-child {
     padding-top: 0;
   } */
@@ -53,11 +54,28 @@ const PostItem = () => {
   useEffect(() => {
     getPostItem();
   }, []);
+  const clickTitle = id => {
+    console.log(id);
+    for (let k = 0; k < post.length; k++) {
+      if (k + 1 === id) {
+        console.log(post[k]);
+      }
+    }
+    window.location.href = `/post/${id}`;
+  };
   return (
-    <div>
-      {post.map((p, key) => (
-        <PostItemBlock>
-          <h2>{p.title}</h2>
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        textAlign: 'justify',
+      }}
+    >
+      {post.map((p, i) => (
+        <PostItemBlock key={i}>
+          <h2 onClick={() => clickTitle(p.id)} style={{ cursor: 'pointer' }}>
+            {p.title}
+          </h2>
           <SubInfo>
             <p>
               <b>username</b>
