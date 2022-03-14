@@ -1,4 +1,5 @@
 const Sequelize = require('sequelize');
+const bcrypt = require('bcrypt');
 
 module.exports = class User extends Sequelize.Model {
   //테이블 설정
@@ -27,6 +28,14 @@ module.exports = class User extends Sequelize.Model {
       },
     );
   }
+  //   static async setPassword(password) {
+  //     const hash = await bcrypt.hash(password, 10);
+  //     this.hashedPassword = hash;
+  //   }
+  //   static async checkPassword(password) {
+  //     const result = await bcrypt.compare(password, this.hashedPassword);
+  //     return result;
+  //   }
 
   //다른 모델과의 관계
   static associate(db) {}

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button, Box, TextField } from '@mui/material';
 import palette from '../../Styles/palette';
 
@@ -8,6 +8,23 @@ const SignUpForm = () => {
   };
   const loginHandler = () => {
     window.location.href = '/';
+  };
+
+  const [id, setId] = useState('');
+  const [pw, setPw] = useState('');
+  const [confirmPw, setConfirmPw] = useState('');
+
+  const inputId = e => {
+    setId(e.target.value);
+    console.log(id);
+  };
+  const inputPw = e => {
+    setPw(e.target.value);
+    console.log(pw);
+  };
+  const inputConfirmPw = e => {
+    setConfirmPw(e.target.value);
+    console.log(confirmPw);
   };
   return (
     <div
@@ -47,6 +64,8 @@ const SignUpForm = () => {
           label="아이디"
           variant="standard"
           margin="normal"
+          onChange={inputId}
+          value={id}
         />
         <TextField
           id="standard-basic"
@@ -54,6 +73,8 @@ const SignUpForm = () => {
           variant="standard"
           margin="normal"
           type="password"
+          onChange={inputPw}
+          value={pw}
         />
         <TextField
           id="standard-basic"
@@ -61,6 +82,8 @@ const SignUpForm = () => {
           variant="standard"
           margin="normal"
           type="password"
+          onChange={inputConfirmPw}
+          value={confirmPw}
         />
         <Button
           variant="contained"
