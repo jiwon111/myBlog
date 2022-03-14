@@ -2,12 +2,12 @@ import React from 'react';
 import { Button, Box, TextField } from '@mui/material';
 import palette from '../../Styles/palette';
 
-const SignInForm = () => {
-  const loginHandler = () => {
-    window.location.href = '/main';
-  };
+const SignUpForm = () => {
   const signUpHandler = () => {
-    window.location.href = '/sign-up';
+    window.location.href = '/';
+  };
+  const loginHandler = () => {
+    window.location.href = '/';
   };
   return (
     <div
@@ -23,7 +23,7 @@ const SignInForm = () => {
       <Box
         sx={{
           width: 360,
-          height: 360,
+          height: 440,
           backgroundColor: 'white',
           borderRadius: '4px',
           boxShadow: '0 0 8px rgba(0, 0, 0, 0.025)',
@@ -53,6 +53,14 @@ const SignInForm = () => {
           label="비밀번호"
           variant="standard"
           margin="normal"
+          type="password"
+        />
+        <TextField
+          id="standard-basic"
+          label="비밀번호 확인"
+          variant="standard"
+          margin="normal"
+          type="password"
         />
         <Button
           variant="contained"
@@ -61,16 +69,16 @@ const SignInForm = () => {
             marginBottom: '20px',
             backgroundColor: `${palette.cyan[5]}`,
           }}
-          onClick={() => loginHandler()}
+          onClick={() => signUpHandler()}
         >
-          로그인
-        </Button>
-        <Button variant="text" onClick={() => signUpHandler()}>
           회원가입
+        </Button>
+        <Button variant="text" onClick={() => loginHandler()}>
+          로그인
         </Button>
       </Box>
     </div>
   );
 };
 
-export default SignInForm;
+export default SignUpForm;

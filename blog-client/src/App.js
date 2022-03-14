@@ -5,6 +5,7 @@ import { Route, Routes } from 'react-router-dom';
 import PostListPage from './Pages/PostListPage';
 import WritePage from './Pages/WritePage';
 import PostViewPage from './Pages/PostViewPage';
+import SignUpForm from './Components/SignUp/SignUpForm';
 
 const App = () => {
   return (
@@ -15,6 +16,7 @@ const App = () => {
         <Route path="/write" element={<WritePage />} />
         {/* <Route path="/post/:id" render={props => <PostViewPage {...props} />} /> */}
         <Route path="/post/:id" element={<PostViewPage />} />
+        <Route path="/sign-up" element={<SignUpForm />} />
       </Routes>
     </div>
   );
