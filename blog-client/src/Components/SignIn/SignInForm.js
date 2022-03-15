@@ -1,10 +1,40 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useCookies } from 'react-cookie';
 import { Button, Box, TextField } from '@mui/material';
 import palette from '../../Styles/palette';
 
 const SignInForm = () => {
-  const loginHandler = () => {
-    window.location.href = '/main';
+  const [cookie, setCookie] = useCookies(['access_token']);
+
+  const [id, setId] = useState('');
+  const [pw, setPw] = useState('');
+
+  const inputId = e => {
+    setId(e.target.value);
+  };
+
+  const inputPw = e => {
+    setPw(e.target.value);
+  };
+
+  const loginHandler = async () => {
+    const response = await fetch(
+      `${process.env.REACT_APP_SERVER_BASE_URL}/api/auth/token`,
+      {
+        headers: {
+          'Content-type': 'application/json',
+        },
+        method: 'POST',
+        body: JSON.stringfy({
+          userId: id,
+          hashedPassword: pw,
+        }),
+      },
+    );
+
+    const result = await response.json();
+
+    setCookie('access_token', result.access_token);
   };
   const signUpHandler = () => {
     window.location.href = '/sign-up';
@@ -47,12 +77,16 @@ const SignInForm = () => {
           label="아이디"
           variant="standard"
           margin="normal"
+          value={id}
+          onChange={inputId}
         />
         <TextField
           id="standard-basic"
           label="비밀번호"
           variant="standard"
           margin="normal"
+          value={pw}
+          onChange={inputPw}
         />
         <Button
           variant="contained"
