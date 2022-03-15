@@ -3,28 +3,44 @@ import { Button, Box, TextField } from '@mui/material';
 import palette from '../../Styles/palette';
 
 const SignUpForm = () => {
-  const signUpHandler = () => {
-    window.location.href = '/';
+  const [id, setId] = useState('');
+  const [pw, setPw] = useState('');
+  const [confirmPw, setConfirmPw] = useState('');
+
+  const signUpHandler = async () => {
+    const response = await fetch(
+      `${process.env.REACT_APP_SERVER_BASE_URL}/api/auth/register`,
+      {
+        headers: {
+          'Content-type': 'application/json',
+        },
+        method: 'POST',
+        body: JSON.stringify({
+          userId: id,
+          hashedPassword: pw,
+        }),
+      },
+    );
+    if (response.status === 201) {
+      alert('회원가입이 완료되었습니다.');
+      window.location.href = '/';
+    }
   };
   const loginHandler = () => {
     window.location.href = '/';
   };
 
-  const [id, setId] = useState('');
-  const [pw, setPw] = useState('');
-  const [confirmPw, setConfirmPw] = useState('');
-
   const inputId = e => {
     setId(e.target.value);
-    console.log(id);
   };
   const inputPw = e => {
     setPw(e.target.value);
-    console.log(pw);
   };
   const inputConfirmPw = e => {
     setConfirmPw(e.target.value);
-    console.log(confirmPw);
+  };
+  const confirmHandler = e => {
+    if (pw !== confirmPw) alert('비밀번호가 다릅니다!');
   };
   return (
     <div
@@ -84,6 +100,7 @@ const SignUpForm = () => {
           type="password"
           onChange={inputConfirmPw}
           value={confirmPw}
+          onBlur={confirmHandler}
         />
         <Button
           variant="contained"
