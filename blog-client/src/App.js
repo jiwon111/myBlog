@@ -6,7 +6,6 @@ import PostListPage from './Pages/PostListPage';
 import WritePage from './Pages/WritePage';
 import PostViewPage from './Pages/PostViewPage';
 import SignUpForm from './Components/SignUp/SignUpForm';
-console.log('----', process.env.REACT_APP_SERVER_BASE_URL);
 
 const App = () => {
   return (
