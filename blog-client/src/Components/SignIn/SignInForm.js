@@ -18,23 +18,22 @@ const SignInForm = () => {
   };
 
   const loginHandler = async () => {
-    const response = await fetch(
-      `${process.env.REACT_APP_SERVER_BASE_URL}/api/auth/token`,
+    const result = await fetch(
+      `${process.env.REACT_APP_SERVER_BASE_URL}/api/auth/login`,
       {
         headers: {
           'Content-type': 'application/json',
         },
         method: 'POST',
-        body: JSON.stringfy({
+        body: JSON.stringify({
           userId: id,
           hashedPassword: pw,
         }),
       },
     );
-
-    const result = await response.json();
-
-    setCookie('access_token', result.access_token);
+    if (result.status == 200) {
+      window.location.href = '/main';
+    }
   };
   const signUpHandler = () => {
     window.location.href = '/sign-up';
@@ -83,6 +82,7 @@ const SignInForm = () => {
         <TextField
           id="standard-basic"
           label="비밀번호"
+          type="password"
           variant="standard"
           margin="normal"
           value={pw}
