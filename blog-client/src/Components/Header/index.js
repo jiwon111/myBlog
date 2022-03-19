@@ -4,6 +4,10 @@ import { Button } from '@mui/material';
 import palette from '../../Styles/palette';
 
 const Header = () => {
+  const loginClickHandler = () => {
+    window.location.href = '/';
+  };
+
   return (
     <div
       style={{
@@ -37,6 +41,7 @@ const Header = () => {
         <Button
           variant="contained"
           style={{ backgroundColor: `${palette.cyan[6]}` }}
+          onClick={() => loginClickHandler()}
         >
           로그인
         </Button>

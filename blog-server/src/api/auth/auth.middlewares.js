@@ -1,5 +1,13 @@
 const jwt = require('jsonwebtoken');
 
+exports.isLoggedIn = (req, res, next) => {
+  if (req.isAuthenticated()) {
+    next();
+  } else {
+    res.status(403).send('로그인 필요');
+  }
+};
+
 exports.generateToken = (req, res, next) => {
   const token = jwt.sign(
     {
