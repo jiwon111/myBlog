@@ -66,17 +66,17 @@ router.post('/login', async (req, res, next) => {
   )(req, res, next);
 });
 
-router.get('/logout', async (req, res, next) => {
-  req.logout();
-  req.session.destroy();
-  res.redirect('/');
-});
-
 router.get('/token', async (req, res, next) => {
   const token = generateToken(req);
   if (verifyToken(token)) {
     return res.json({ status: 203, message: '유효한 토큰' });
   }
+});
+
+router.get('/logout', async (req, res, next) => {
+  req.logout();
+  req.session.destroy();
+  res.redirect('/');
 });
 
 module.exports = router;

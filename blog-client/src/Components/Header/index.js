@@ -10,27 +10,25 @@ const Header = () => {
 
   const logoutClickHandler = () => {
     removeCookie('access_token');
+    window.location.href = '/';
+  };
+
+  const res = async () => {
+    await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/api/auth/token`, {
+      headers: {
+        Authorization: `Bearer ${cookie.access_token}`,
+      },
+      method: 'GET',
+    })
+      .then(response => response.json())
+      .then(json => {
+        setUser(json);
+      });
   };
 
   useEffect(() => {
-    const res = async () => {
-      await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/api/auth/token`, {
-        headers: {
-          Authorization: `Bearer ${cookie.access_token}`,
-        },
-        method: 'GET',
-      })
-        .then(response => response.json())
-        .then(json => {
-          setUser(json);
-        });
-    };
-    res();
-  }, []);
-
-  useEffect(() => {
     if (cookie.access_token === 'undefined') {
-      window.location.href = '/';
+      res();
     }
   }, [cookie]);
 

@@ -24,8 +24,8 @@ exports.generateToken = (req, res, next) => {
 
 exports.verifyToken = (req, res, next) => {
   try {
-    decoded = jwt.verify(req, process.env.JWT_SECRET);
-    console.log(decoded);
+    const decoded = jwt.verify(req, process.env.JWT_SECRET);
+    // console.log(decoded);
     return 1;
   } catch (err) {
     console.error(err);

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import palette from '../../Styles/palette';
+import PostViewerButtons from '../Post/PostViewerButtons';
 
 const PostViewerBlock = styled.div`
   margin-top: 4rem;
@@ -33,9 +34,11 @@ const PostViewer = postId => {
         setPost(json);
       });
   };
+
   useEffect(() => {
     getPostItem();
   }, []);
+
   return (
     <>
       {post && (
@@ -46,6 +49,7 @@ const PostViewer = postId => {
             <Tags></Tags>
           </PostHead>
           <PostContent>{post.body}</PostContent>
+          <PostViewerButtons postId={postId.postId} />
         </PostViewerBlock>
       )}
     </>

@@ -1,7 +1,8 @@
 import React from 'react';
 import { Button } from '@mui/material';
 import palette from '../../Styles/palette';
-const PostActionButtons = ({ title, content, tagList }) => {
+const PostActionButtons = ({ title, content, tagList, id }) => {
+  //새 글 쓰기
   const writePost = async () => {
     const response = await fetch(
       `${process.env.REACT_APP_SERVER_BASE_URL}/api/posts`,
@@ -23,9 +24,32 @@ const PostActionButtons = ({ title, content, tagList }) => {
       window.location.href = '/main';
     }
   };
+
+  //수정 글 쓰기
+  const editPost = async () => {
+    const response = await fetch(
+      `${process.env.REACT_APP_SERVER_BASE_URL}/api/posts/${id}`,
+      {
+        headers: {
+          'Content-type': 'application/json',
+        },
+        method: 'PUT',
+        body: JSON.stringify({
+          title: title,
+          body: content,
+          tags: null,
+        }),
+      },
+    );
+    if (response.status === 201) {
+      alert('포스트가 수정되었습니다.');
+      window.location.href = '/main';
+    }
+  };
+
   //등록
   const postClickHandler = () => {
-    writePost();
+    if (id === undefined) writePost();
   };
   //취소
   const cancelClick = () => {
@@ -40,7 +64,7 @@ const PostActionButtons = ({ title, content, tagList }) => {
           color: 'white',
           marginRight: '1rem',
         }}
-        onClick={title && content ? postClickHandler : null}
+        onClick={title && content ? postClickHandler : editPost}
       >
         포스트 등록
       </Button>

@@ -14,6 +14,7 @@ const App = () => {
         <Route path="/" element={<SignInForm />} />
         <Route path="/main" element={<PostListPage />} />
         <Route path="/write" element={<WritePage />} />
+        <Route path="/write/:id" element={<WritePage />} />
         {/* <Route path="/post/:id" render={props => <PostViewPage {...props} />} /> */}
         <Route path="/post/:id" element={<PostViewPage />} />
         <Route path="/sign-up" element={<SignUpForm />} />
