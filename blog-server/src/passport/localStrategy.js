@@ -19,12 +19,15 @@ module.exports = () => {
               isUser.hashedPassword,
             );
             if (result) {
+              console.log('유저임');
               done(null, isUser);
             } else {
-              done(null, false, { message: '비밀번호가 일치하지 않습니다.' });
+              console.log('비밀번호가 일치하지 않음');
+              done(null, false, { status: 401 });
             }
           } else {
-            done(null, false, { message: '가입되지 않은 회원입니다.' });
+            console.log('가입되지 않은 회원임');
+            done(null, false, { status: 403 });
           }
         } catch (err) {
           console.error(err);

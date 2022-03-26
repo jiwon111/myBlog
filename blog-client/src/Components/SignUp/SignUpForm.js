@@ -24,6 +24,8 @@ const SignUpForm = () => {
     if (response.status === 201) {
       alert('회원가입이 완료되었습니다.');
       window.location.href = '/';
+    } else if (response.status === 400) {
+      alert('이미 존재하는 아이디입니다.');
     } else {
       alert('오류');
     }

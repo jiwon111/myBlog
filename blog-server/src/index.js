@@ -55,6 +55,6 @@ app.use(passport.session());
 
 app.use('/api', api); //api 라우트 적용(/api/test)
 
-app.listen(5000, () => {
-  console.log('5000번 포트에서 대기 중');
+app.listen(process.env.PORT, () => {
+  console.log(`${process.env.PORT}번 포트에서 대기 중`);
 });

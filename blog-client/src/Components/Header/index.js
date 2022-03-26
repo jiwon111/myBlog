@@ -1,12 +1,38 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@mui/material';
 import palette from '../../Styles/palette';
+import { useCookies } from 'react-cookie';
 
 const Header = () => {
-  const loginClickHandler = () => {
-    window.location.href = '/';
+  const [cookie, removeCookie] = useCookies(['access_token']);
+  const [user, setUser] = useState();
+
+  const logoutClickHandler = () => {
+    removeCookie('access_token');
   };
+
+  useEffect(() => {
+    const res = async () => {
+      await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/api/auth/token`, {
+        headers: {
+          Authorization: `Bearer ${cookie.access_token}`,
+        },
+        method: 'GET',
+      })
+        .then(response => response.json())
+        .then(json => {
+          setUser(json);
+        });
+    };
+    res();
+  }, []);
+
+  useEffect(() => {
+    if (cookie.access_token === 'undefined') {
+      window.location.href = '/';
+    }
+  }, [cookie]);
 
   return (
     <div
@@ -41,9 +67,9 @@ const Header = () => {
         <Button
           variant="contained"
           style={{ backgroundColor: `${palette.cyan[6]}` }}
-          onClick={() => loginClickHandler()}
+          onClick={() => logoutClickHandler()}
         >
-          로그인
+          로그아웃
         </Button>
       </div>
     </div>

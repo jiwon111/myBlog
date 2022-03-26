@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useCookies } from 'react-cookie';
 import { Button, Box, TextField } from '@mui/material';
 import palette from '../../Styles/palette';
@@ -17,8 +17,34 @@ const SignInForm = () => {
     setPw(e.target.value);
   };
 
+  const getAuth = async () => {
+    const response = await fetch(
+      `${process.env.REACT_APP_SERVER_BASE_URL}/api/auth/token`,
+      {
+        headers: {
+          'Content-type': 'application/json',
+          Accept: 'application/json',
+          Authorization: `Bearer ${cookie.access_token}`,
+        },
+        method: 'GET',
+      },
+    );
+
+    const data = await response.json();
+
+    if (data.status === 203) {
+      window.location.href = '/main';
+    } else {
+      alert('로그인 실패');
+    }
+  };
+
+  useEffect(() => {
+    if (cookie.access_token !== 'undefined') getAuth();
+  }, [cookie]);
+
   const loginHandler = async () => {
-    const result = await fetch(
+    const response = await fetch(
       `${process.env.REACT_APP_SERVER_BASE_URL}/api/auth/login`,
       {
         headers: {
@@ -31,13 +57,24 @@ const SignInForm = () => {
         }),
       },
     );
-    if (result.status == 200) {
-      window.location.href = '/main';
+    const responseData = await response.json();
+
+    if (response.status === 200) {
+      setCookie('access_token', responseData.token);
+      // window.location.href = '/main';
+    } else if (response.status === 401) {
+      alert('아이디나 비밀번호가 일치하지 않습니다.');
+      setId('');
+      setPw('');
+    } else {
+      alert('로그인 실패');
     }
   };
+
   const signUpHandler = () => {
     window.location.href = '/sign-up';
   };
+
   return (
     <div
       style={{

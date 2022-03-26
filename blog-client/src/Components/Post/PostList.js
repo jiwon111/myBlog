@@ -50,15 +50,13 @@ const PostItem = () => {
         setPost(json);
       });
   };
-  console.log(post);
   useEffect(() => {
     getPostItem();
   }, []);
   const clickTitle = id => {
-    console.log(id);
     for (let k = 0; k < post.length; k++) {
       if (k + 1 === id) {
-        console.log(post[k]);
+        //console.log(post[k]);
       }
     }
     window.location.href = `/post/${id}`;
