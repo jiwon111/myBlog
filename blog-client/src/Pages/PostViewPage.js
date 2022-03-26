@@ -1,4 +1,5 @@
 import React from 'react';
+import { Helmet } from 'react-helmet-async';
 import { useParams } from 'react-router-dom';
 import Header from '../Components/Header';
 import palette from '../Styles/palette';
@@ -8,6 +9,9 @@ const PostViewPage = () => {
   const id = useParams().id;
   return (
     <>
+      <Helmet>
+        <title>포스트 조회</title>
+      </Helmet>
       <Header />
       <PostViewer postId={id} />
     </>

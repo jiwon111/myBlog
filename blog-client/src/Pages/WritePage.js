@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { useParams } from 'react-router-dom';
 import Editor from '../Components/Write/Editor';
 import Header from '../Components/Header';
@@ -14,6 +15,9 @@ const WritePage = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>글 작성하기</title>
+      </Helmet>
       <Header />
       <Editor setTitle={setTitle} setContent={setContent} id={id} />
       <TagBox setTagList={setTagList} />

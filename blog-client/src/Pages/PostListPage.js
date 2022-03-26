@@ -1,4 +1,5 @@
 import React from 'react';
+import { Helmet } from 'react-helmet-async';
 import Header from '../Components/Header';
 import AddBoxTwoToneIcon from '@mui/icons-material/AddBoxTwoTone';
 import { Button } from '@mui/material';
@@ -11,6 +12,9 @@ const PostListPage = () => {
   };
   return (
     <>
+      <Helmet>
+        <title>포스트 목록 조회</title>
+      </Helmet>
       <Header />
       <Button
         variant="contained"
